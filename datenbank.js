@@ -15,7 +15,8 @@ async function onloadFunc(){
             }
         )
     }
-    await addEditSingleUser(users[2].id, {name: 'Maradona'});   // direkte aktualisierung des Users, Namensänderung
+    await addEditSingleUser(users[4].id, {name: 'Breitner'});   // direkte aktualisierung des Users, Namensänderung
+    await addEditSingleUser(); // push new User
 
     console.log(users);
 }
@@ -43,13 +44,35 @@ async function putData(path = "", data = {}){
     }
 }
 
-async function addEditSingleUser(id = 44, user = {name: 'Tülay', email: 'mustermann@gmail.com'}) {
-    await putData(`namen/${id}`, user);
+async function addEditSingleUser(id = 66, user = {name: 'Tülay', email: 'mustermann@gmail.com'}) {
+    try {
+        let response = await putData(`namen/${id}`, user);
+        return response;
+    } catch (error) {
+        console.error("Error in addEditSingleUser:", error);
+        return null;
+    }
 }
 
+
+
 async function getAllUsers(path) {
-    let response = await fetch(BASE_URL + path + ".json");
-    return await response.json();
+    try {
+        let response = await fetch(BASE_URL + path + ".json");
+        
+        if (!response.ok) {
+            if (response.status === 404) {
+                throw new Error("Resource not found: " + response.statusText);
+            } else {
+                throw new Error("Network response was not ok: " + response.statusText);
+            }
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error("Error in getAllUsers:", error);
+        return null;
+    }
 }
 
 onloadFunc();
