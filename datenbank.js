@@ -15,7 +15,7 @@ async function onloadFunc(){
             }
         )
     }
-    await addEditSingleUser();
+    await addEditSingleUser(users[2].id, {name: 'Maradona'});   // direkte aktualisierung des Users, Namensänderung
 
     console.log(users);
 }
