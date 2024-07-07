@@ -1,4 +1,4 @@
-let names = [];
+let users = [];
 
 const BASE_URL = "https://remotestorage-3f179-default-rtdb.europe-west1.firebasedatabase.app/";
 
@@ -6,9 +6,18 @@ async function onloadFunc(){
     let userResponse = await getAllUsers("namen");
     let UserKeysArray = Object.keys(userResponse);
 
+    for (let i = 0; i < UserKeysArray.length; i++) {
+        users.push(
+            {
+                id: UserKeysArray[i],
+                user: userResponse[UserKeysArray[i]].name,
+                email: userResponse[UserKeysArray[i]].email
+            }
+        )
+    }
     await addEditSingleUser();
 
-    console.log(UserKeysArray);
+    console.log(users);
 }
 
 async function putData(path = "", data = {}){ 
@@ -34,7 +43,7 @@ async function putData(path = "", data = {}){
     }
 }
 
-async function addEditSingleUser(id = 33, user = {name: 'Haci Yusuf', email: 'mustermann@gmail.com'}) {
+async function addEditSingleUser(id = 44, user = {name: 'Tülay', email: 'mustermann@gmail.com'}) {
     await putData(`namen/${id}`, user);
 }
 
