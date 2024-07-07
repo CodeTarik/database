@@ -4,9 +4,11 @@ const BASE_URL = "https://remotestorage-3f179-default-rtdb.europe-west1.firebase
 
 async function onloadFunc(){
     let userResponse = await getAllUsers("namen");
-    console.log(userResponse);
+    let UserKeysArray = Object.keys(userResponse);
 
     await addEditSingleUser();
+
+    console.log(UserKeysArray);
 }
 
 async function putData(path = "", data = {}){ 
