@@ -15,7 +15,7 @@ async function onloadFunc(){
             }
         )
     }
-    await addEditSingleUser(users[4].id, {name: 'Breitner'});   // direkte aktualisierung des Users, Namensänderung
+    await addEditSingleUser(users[5].id, {name: 'Özil'});   // direkte aktualisierung des Users, Namensänderung
     await addEditSingleUser(); // push new User
 
     console.log(users);
@@ -44,7 +44,7 @@ async function putData(path = "", data = {}){
     }
 }
 
-async function addEditSingleUser(id = 66, user = {name: 'Tülay', email: 'mustermann@gmail.com'}) {
+async function addEditSingleUser(id = 77, user = {name: 'Galatasaray', email: 'mustermann@gmail.com'}) {
     try {
         let response = await putData(`namen/${id}`, user);
         return response;
